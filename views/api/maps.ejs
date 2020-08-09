@@ -1,0 +1,85 @@
+<%- include('../header.ejs')%>
+<div class="pb-2 mt-2 mb-4 border-bottom">
+  <h2><i class="fas fa-map-marked"></i>HERE Maps API</h2>
+</div>
+<div class="btn-group d-flex" role="group"><a class="btn btn-primary w-100" href="https://developer.here.com"
+    target="_blank"><i class="far fa-check-square fa-sm"></i>HERE Developer Portal</a><a class="btn btn-primary w-100"
+    href="https://developer.here.com/documentation/map-image/topics/resource-map.html" target="_blank"><i
+      class="fas fa-laptop fa-sm"></i>Image Map Parameters</a></div><br />
+<br />
+<div class="pb-2 mt-2 mt-4 border-top">
+  <h3>Map using Here Interactive Map Service</h3>
+</div>
+<div style="display:flex; justify-content: center;">The client-side scripts are used for rendering this map:</div>
+<div style="display:flex; justify-content: center;">
+  <div id="map" style="width: 100vw; height: 100vh"></div>
+</div>
+<div style="display:flex; justify-content: center;">Straight line distance between the Fremont Troll and Seattle Art
+  Museum is&nbsp
+  <div id="directLineDistance"></div>&nbspmiles.</div>
+<script src="https://js.api.here.com/v3/3.0/mapsjs-core.js" type="text/javascript" charset="utf-8"></script>
+<script src="https://js.api.here.com/v3/3.0/mapsjs-service.js" type="text/javascript" charset="utf-8"></script>
+<script src="https://js.api.here.com/v3/3.0/mapsjs-mapevents.js" type="text/javascript" charset="utf-8"></script>
+<script>
+  const platform = new H.service.Platform({
+    useHTTPS: true,
+    "app_id": "",
+    "app_code": ""
+  });
+  const map = new H.Map(document.getElementById("map"), platform.createDefaultLayers().normal.map, {
+    zoom: 12,
+    center: {
+      lat: 21.027763,
+      lng: 105.834160
+    }
+  });
+  const mapEvents = new H.mapevents.MapEvents(map);
+  // at this point the map is rendered, lets add some markers
+  const behavior = new H.mapevents.Behavior(mapEvents);
+  const marker1 = new H.map.Marker({
+    lat: 21.027763,
+    lng: 105.834160
+  });
+  const marker2 = new H.map.Marker({
+    lat: 21.027763,
+    lng: 105.834160
+  });
+  const marker3 = new H.map.Marker({
+    lat: 21.027763,
+    lng: 105.834160
+  });
+  const marker4 = new H.map.Marker({
+    lat: 21.027763,
+    lng: 105.834160
+  });
+
+  const lineString = new H.geo.LineString();
+  lineString.pushPoint(marker1.getPosition());
+  lineString.pushPoint(marker2.getPosition());
+  lineString.pushPoint(marker3.getPosition());
+  lineString.pushPoint(marker4.getPosition());
+
+  const polygon = new H.map.Polygon(lineString, {
+    style: {
+      strokeColor: "black",
+      lineWidth: 2,
+      fillColor: "rgba(255, 0, 255, 0.5)"
+    }
+  });
+  const circle = new H.map.Circle(marker4.getPosition(), 1500, {
+    style: {
+      strokeColor: 'rgba(0,128,0, 0.6)',
+      lineWidth: 1,
+      fillColor: 'rgba(0, 128, 0, 0.3)'
+    }
+  });
+  map.addObjects([marker1, marker2, marker3, marker4, polygon, circle]);
+  // At this point we have rendered all of the markers, the polygon and the circle that were set in the prior lines
+
+  const distance = (marker1.getPosition().distance(marker2.getPosition()) / 1609.344).toFixed(2);
+  directLineDistance.innerHTML = distance
+</script>
+
+
+
+<%- include('../footer.ejs')%>

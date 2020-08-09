@@ -1,0 +1,21 @@
+<%- include('../header.ejs')%>
+<%- include('../partials/flash.ejs')%>
+<div class="pb-2 mt-2 mb-4 border-bottom">
+  <h3>Reset Password</h3>
+</div>
+<form method="POST"><input type="hidden" name="_csrf" value="" />
+  <div class="form-group row"><label class="col-md-3 col-form-label font-weight-bold text-right" for="password">New
+      Password</label>
+    <div class="col-md-7"><input class="form-control" type="password" name="password" id="password"
+        placeholder="New password" autofocus="autofocus" autocomplete="new-password" minlength="8"
+        required="required" /></div>
+  </div>
+  <div class="form-group row"><label class="col-md-3 col-form-label font-weight-bold text-right" for="confirm">Confirm
+      Password</label>
+    <div class="col-md-7"><input class="form-control" type="password" name="confirm" id="confirm"
+        placeholder="Confirm password" autocomplete="new-password" minlength="8" required="required" /></div>
+  </div>
+  <div class="form-group offset-sm-3 col-md-7 pl-2"><button class="btn btn-primary btn-reset" type="submit"><i
+        class="far fa-keyboard fa-sm"></i>Change Password</button></div>
+</form>
+<%- include('../footer.ejs')%>

@@ -1,0 +1,23 @@
+<%- include('../header.ejs')%>
+<%- include('../partials/flash.ejs')%>
+<div class="pb-2 mt-2 mb-4 border-bottom">
+  <h2><i class="fas fa-upload fa-sm"></i>File Upload</h2>
+</div>
+<div class="btn-group d-flex" role="group"><a class="btn btn-success w-100" href="https://github.com/expressjs/multer"
+    target="_blank"><i class="fas fa-book fa-sm"></i>Multer Documentation</a><a class="btn btn-success w-100"
+    href="http://codepen.io/search/pens?q=custom+file+upload&amp;limit=all&amp;type=type-pens" target="_blank"><i
+      class="fas fa-laptop fa-sm"></i>Customize File Upload</a></div>
+<h3>File Upload Form</h3>
+<div class="row">
+  <div class="col-md-6">
+    <p>All files will be uploaded to "/uploads" directory.</p>
+    <form role="form" enctype="multipart/form-data" method="POST">
+      <input type="hidden" name="_csrf" />
+
+      <div class="form-group"><label class="col-form-label font-weight-bold">File Input</label>
+        <div class="col-md-6"><input type="file" name="myFile" /></div>
+      </div><button class="btn btn-primary" type="submit">Submit</button>
+    </form>
+  </div>
+</div>
+<%- include('../footer.ejs')%>
